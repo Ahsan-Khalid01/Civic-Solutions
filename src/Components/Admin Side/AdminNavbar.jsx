@@ -1,6 +1,10 @@
 ﻿import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AdminContext } from "./AdminContext";
 
 function AdminNavbar() {
+  const { user, handleLogout } = useContext(AdminContext);
+
   const navLinks = [
     { to: "/", label: "Dashboard" },
     { to: "", label: "Issues" },
@@ -42,11 +46,86 @@ function AdminNavbar() {
         </ul>
 
         <form className="d-flex" role="search">
-          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <input
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
           <button className="btn btn-outline-success" type="submit">
             Search
           </button>
-          <Link className="btn btn-warning mx-2" to="/login">
+          {user && (
+            <span className="text-warning mx-2 fw-bold">
+              Welcome, {user.name}
+            </span>
+          )}
+          <Link
+            className="btn btn-warning mx-2"
+            to="/login"
+            onClick={handleLogout}
+          >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
             Logout
           </Link>
         </form>

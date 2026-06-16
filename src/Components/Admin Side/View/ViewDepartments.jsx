@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function ViewDepartments() {
+  const [departments, setDepartments] = useState([]);
+
+  useEffect(() => {
+    const data = [
+      { id: "D-01", name: "Water & Sanitation", head: "Engr. Tariq Mahmood", phone: "042-1111111", email: "water@civictrack.pk", area: "Lahore Central", totalIssues: 18, resolved: 12 },
+      { id: "D-02", name: "Electricity Department", head: "Engr. Salman Raza", phone: "042-2222222", email: "elec@civictrack.pk", area: "Lahore East", totalIssues: 24, resolved: 19 },
+      { id: "D-03", name: "Gas Department", head: "Engr. Kamran Ali", phone: "042-3333333", email: "gas@civictrack.pk", area: "Lahore West", totalIssues: 11, resolved: 9 },
+      { id: "D-04", name: "Roads & Infrastructure", head: "Engr. Adeel Chaudhry", phone: "042-4444444", email: "roads@civictrack.pk", area: "All Lahore", totalIssues: 31, resolved: 21 },
+      { id: "D-05", name: "Education Department", head: "Dr. Nadia Hussain", phone: "042-5555555", email: "edu@civictrack.pk", area: "Lahore North", totalIssues: 8, resolved: 4 },
+      { id: "D-06", name: "Sanitation Department", head: "Mr. Zafar Iqbal", phone: "042-6666666", email: "san@civictrack.pk", area: "Lahore South", totalIssues: 22, resolved: 15 },
+    ];
+    setDepartments(data);
+  }, []);
+
   return (
     <div>
-      <h2> All Departments</h2>
-
+      <h2>All Departments</h2>
       <table border="1" cellPadding="8" cellSpacing="0" width="100%">
         <thead>
           <tr>
@@ -19,66 +32,18 @@ function ViewDepartments() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>D-01</td>
-            <td>Water & Sanitation</td>
-            <td>Engr. Tariq Mahmood</td>
-            <td>042-1111111</td>
-            <td>water@civictrack.pk</td>
-            <td>Lahore Central</td>
-            <td>18</td>
-            <td>12</td>
-          </tr>
-          <tr>
-            <td>D-02</td>
-            <td>Electricity Department</td>
-            <td>Engr. Salman Raza</td>
-            <td>042-2222222</td>
-            <td>elec@civictrack.pk</td>
-            <td>Lahore East</td>
-            <td>24</td>
-            <td>19</td>
-          </tr>
-          <tr>
-            <td>D-03</td>
-            <td>Gas Department</td>
-            <td>Engr. Kamran Ali</td>
-            <td>042-3333333</td>
-            <td>gas@civictrack.pk</td>
-            <td>Lahore West</td>
-            <td>11</td>
-            <td>9</td>
-          </tr>
-          <tr>
-            <td>D-04</td>
-            <td>Roads & Infrastructure</td>
-            <td>Engr. Adeel Chaudhry</td>
-            <td>042-4444444</td>
-            <td>roads@civictrack.pk</td>
-            <td>All Lahore</td>
-            <td>31</td>
-            <td>21</td>
-          </tr>
-          <tr>
-            <td>D-05</td>
-            <td>Education Department</td>
-            <td>Dr. Nadia Hussain</td>
-            <td>042-5555555</td>
-            <td>edu@civictrack.pk</td>
-            <td>Lahore North</td>
-            <td>8</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td>D-06</td>
-            <td>Sanitation Department</td>
-            <td>Mr. Zafar Iqbal</td>
-            <td>042-6666666</td>
-            <td>san@civictrack.pk</td>
-            <td>Lahore South</td>
-            <td>22</td>
-            <td>15</td>
-          </tr>
+          {departments.map((dept) => (
+            <tr key={dept.id}>
+              <td>{dept.id}</td>
+              <td>{dept.name}</td>
+              <td>{dept.head}</td>
+              <td>{dept.phone}</td>
+              <td>{dept.email}</td>
+              <td>{dept.area}</td>
+              <td>{dept.totalIssues}</td>
+              <td>{dept.resolved}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

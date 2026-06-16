@@ -1,146 +1,216 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+  departmentName: z.string().min(2, { message: "Department name must be at least 2 characters long" }),
+  city: z.string().min(2, { message: "City name must be at least 2 characters long" }),
+  postalCode: z.string().regex(/^[0-9]{5}$/, { message: "Invalid postal code" }),
+  category: z.string().min(2, { message: "Category must be at least 2 characters long" }),
+  headName: z.string().min(2, { message: "Head name must be at least 2 characters long" }),
+  contact: z.string().email({ message: "Invalid email address" }),
+});
 
 function Modify() {
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(schema) });
 
-  const [data, setData] = useState({
-    departmentName: "",city:"",postalCode:"",category: "",headName:"",contact: "",status: ""
-  });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setData((prev) => ({
-      ...prev,[name]: value
-    }));
+  function submit(data) {
+    console.log(data);
   }
 
   return (
     <>
       <div className="position-absolute top-50 start-50 translate-middle">
-
-        <form>
-
+        <form onSubmit={handleSubmit(submit)}>
           <div>
             <label>Modify Department</label>
           </div>
           <br />
 
           <div className="mb-3">
-            <label>Department Name</label>
+            <label htmlfor="departmentName" className="form-label">
+              Department Name
+            </label>
             <input
               type="text"
+              id="departmentName"
               className="form-control"
               placeholder="Enter Department Name"
-              name="departmentName"
-              value={data.departmentName}
-              onChange={handleChange}
+              {...register("departmentName")}
             />
+            <p style={{ color: "Red" }}>{errors.departmentName?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Department ID</label>
+            <label htmlfor="departmentId" className="form-label">
+              Department ID
+            </label>
             <input
               type="text"
+              id="departmentId"
               className="form-control"
               placeholder="Cant Modify"
               disabled
             />
+            <p style={{ color: "Red" }}>{errors.departmentId?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>City</label>
+            <label htmlfor="city" className="form-label">
+              City
+            </label>
             <input
               type="text"
+              id="city"
               className="form-control"
               placeholder="Enter City Name"
-              name="city"
-              value={data.city}
-              onChange={handleChange}
+              {...register("city")}
             />
+            <p style={{ color: "Red" }}>{errors.city?.message}</p>
           </div>
+          
 
           <div className="mb-3">
-            <label>Postal Code</label>
+            <label htmlfor="postalCode" className="form-label">
+              Postal Code
+            </label>
             <input
               type="text"
+              id="postalCode"
               className="form-control"
               placeholder="Enter City Postal Code"
-              name="postalCode"
-              value={data.postalCode}
-              onChange={handleChange}
+              {...register("postalCode")}
             />
+            <p style={{ color: "Red" }}>{errors.postalCode?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Category</label>
+            <label htmlfor="category" className="form-label">
+              Category
+            </label>
             <input
               type="text"
+              id="category"
               className="form-control"
               placeholder="Select Category"
-              name="category"
-              value={data.category}
-              onChange={handleChange}
+              {...register("category")}
             />
+            <p style={{ color: "Red" }}>{errors.category?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Department Head Name</label>
+            <label htmlfor="headName" className="form-label">
+              Department Head Name
+            </label>
             <input
               type="text"
+              id="headName"
               className="form-control"
               placeholder="Enter Department Head Name"
-              name="headName"
-              value={data.headName}
-              onChange={handleChange}
+              {...register("headName")}
             />
+            <p style={{ color: "Red" }}>{errors.headName?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Contact</label>
+            <label htmlfor="contact" className="form-label">
+              Contact
+            </label>
             <input
               type="text"
+              id="contact"
               className="form-control"
               placeholder="Enter Contact"
-              name="contact"
-              value={data.contact}
-              onChange={handleChange}
+              {...register("contact")}
             />
+            <p style={{ color: "Red" }}>{errors.contact?.message}</p>
+          </div>
+           
+
+          <div className="mb-3">
+            <label htmlfor="category" className="form-label">
+              Category
+            </label>
+            <input
+              type="text"
+              id="category"
+              className="form-control"
+              placeholder="Select Category"
+              {...register("category")}
+            />
+            <p style={{ color: "Red" }}>{errors.category?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Status</label><br />
-
-            <label>Inactive</label>
+            <label htmlfor="headName" className="form-label">
+              Department Head Name
+            </label>
             <input
+              type="text"
+              id="headName"
+              className="form-control"
+              placeholder="Enter Department Head Name"
+              {...register("headName")}
+            />
+            <p style={{ color: "Red" }}>{errors.headName?.message}</p>
+          </div>
+
+          <div className="mb-3">
+            <label htmlfor="contact" className="form-label">
+              Contact
+            </label>
+            <input
+              type="text"
+              id="contact"
+              className="form-control"
+              placeholder="Enter Contact"
+              {...register("contact")}
+            />
+            <p style={{ color: "Red" }}>{errors.contact?.message}</p>
+          </div>
+
+          <div className="mb-3">
+            <label htmlfor="status" className="form-label">
+              Status
+            </label>
+            <br />
+
+            <label htmlfor="inactive">Inactive</label>
+            <input
+              id="inactive"
               type="radio"
               name="status"
               value="inactive"
-              onChange={handleChange}
+              {...register("status")}
             />
+            <p style={{ color: "Red" }}>{errors.status?.message}</p>
 
-            <label>Active</label>
+            <label htmlfor="active">Active</label>
             <input
+            id="active"
               type="radio"
               name="status"
               value="active"
-              onChange={handleChange}
+              {...register("status")}
             />
+            <p style={{ color: "Red" }}>{errors.status?.message}</p>
 
-            <label>Suspend</label>
+            <label htmlfor="suspend">Suspend</label>
             <input
+              id="suspend"
               type="radio"
               name="status"
               value="suspend"
-              onChange={handleChange}
+              {...register("status")}
             />
+            <p style={{ color: "Red" }}>{errors.status?.message}</p>
           </div>
 
           <button type="submit" className="btn btn-primary">
             Update
           </button>
-
         </form>
-
       </div>
     </>
   );

@@ -13,7 +13,7 @@ function AdminHero(){
   style={{ marginTop: "0px" }}
 >
 
-  {/* Top Heading (Project Name) */}
+  {/* Top Heading Project Name */}
   <div
     className="position-absolute text-white"
     style={{

@@ -1,26 +1,16 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 function DepartmentLogin() {
+  const { register, handleSubmit } = useForm();
 
-  const [data, setData] = useState(
-    {
-    departmentId: "", password: ""
-  });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setData((prev) => ({
-      ...prev, [name]: value
-    }));
+  function submit(data) {
+    console.log(data);
   }
 
   return (
     <>
       <div className="position-absolute top-50 start-50 translate-middle">
-
-        <form>
-
+        <form onSubmit={handleSubmit(submit)}>
           <div>
             <label>Department Login</label>
           </div>
@@ -32,9 +22,7 @@ function DepartmentLogin() {
               type="text"
               className="form-control"
               placeholder="Enter Department ID"
-              name="departmentId"
-              value={data.departmentId}
-              onChange={handleChange}
+              {...register("departmentId")}
             />
           </div>
 
@@ -44,18 +32,14 @@ function DepartmentLogin() {
               type="password"
               className="form-control"
               placeholder="Enter Password"
-              name="password"
-              value={data.password}
-              onChange={handleChange}
+              {...register("password")}
             />
           </div>
 
           <button type="submit" className="btn btn-primary">
             Login
           </button>
-
         </form>
-
       </div>
     </>
   );

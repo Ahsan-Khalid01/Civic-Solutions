@@ -1,123 +1,137 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+  departmentName: z.string().min(2, { message: "Department name must be at least 2 characters long" }),
+  departmentId: z.string().uuid({ message: "Invalid department ID" }),
+  city: z.string().min(2, { message: "City name must be at least 2 characters long" }),
+  postalCode: z.string().regex(/^[0-9]{5}$/, { message: "Invalid postal code" }),
+  category: z.string().min(2, { message: "Category must be at least 2 characters long" }),
+  headName: z.string().min(2, { message: "Head name must be at least 2 characters long" }),
+  reason: z.string().min(10, { message: "Reason must be at least 10 characters long" }),
+});
 
 function DeleteForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(schema) });
 
-  const [data, setData] = useState({
-    departmentName:"",departmentId:"",city:"",postalCode:"",category: "",headName: "",reason: ""
-  });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setData((prev) => ({
-      ...prev,[name]: value
-    }));
+  function submit(data) {
+    console.log(data);
   }
 
   return (
     <>
-
       <div className="position-absolute top-50 start-50 translate-middle">
-
-        <form>
-
+        <form onSubmit={handleSubmit(submit)}>
           <div>
             <label>Delete Department</label>
           </div>
           <br />
 
           <div className="mb-3">
-            <label>Department Name</label>
+            <label htmlfor="departmentName" className="form-label">
+              Department Name
+            </label>
             <input
               type="text"
+              id="departmentName" 
               className="form-control"
               placeholder="Enter Department Name"
-              name="departmentName"
-              value={data.departmentName}
-              onChange={handleChange}
+              {...register("departmentName")}
             />
+            <p style={{ color: "Red" }}>{errors.departmentName?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Department ID</label>
+            <label htmlfor="departmentId" className="form-label">
+              Department ID
+            </label>
             <input
               type="text"
+              id="departmentId"
               className="form-control"
               placeholder="Enter Department ID"
-              name="departmentId"
-              value={data.departmentId}
-              onChange={handleChange}
+              {...register("departmentId")}
             />
+            <p style={{ color: "Red" }}>{errors.departmentId?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>City</label>
+            <label htmlfor="city" className="form-label">
+              City
+            </label>
             <input
               type="text"
+              id="city"
               className="form-control"
               placeholder="Enter City Name"
-              name="city"
-              value={data.city}
-              onChange={handleChange}
+              {...register("city")}
             />
+            <p style={{ color: "Red" }}>{errors.city?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Postal Code</label>
+            <label htmlfor="postalCode" className="form-label">
+              Postal Code
+            </label>
             <input
               type="text"
+              id="postalCode"
               className="form-control"
               placeholder="Enter Your Postal Code"
-              name="postalCode"
-              value={data.postalCode}
-              onChange={handleChange}
+              {...register("postalCode")}
             />
+            <p style={{ color: "Red" }}>{errors.postalCode?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Category</label>
+            <label htmlfor="category" className="form-label">
+              Category
+            </label>
             <input
               type="text"
+              id="category"
               className="form-control"
               placeholder="Select Category"
-              name="category"
-              value={data.category}
-              onChange={handleChange}
+              {...register("category")}
             />
+            <p style={{ color: "Red" }}>{errors.category?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Department Head Name</label>
+            <label htmlfor="headName" className="form-label">
+              Department Head Name
+            </label>
             <input
               type="text"
+              id="headName"
               className="form-control"
               placeholder="Enter Department Head Name"
-              name="headName"
-              value={data.headName}
-              onChange={handleChange}
+              {...register("headName")}
             />
+            <p style={{ color: "Red" }}>{errors.headName?.message}</p>
           </div>
 
           <div className="mb-3">
-            <label>Reason</label>
+            <label htmlfor="reason" className="form-label">
+              Reason
+            </label>
             <input
               type="text"
+              id="reason"
               className="form-control"
               placeholder="Why we delete this department?"
-              name="reason"
-              value={data.reason}
-              onChange={handleChange}
+              {...register("reason")}
             />
+            <p style={{ color: "Red" }}>{errors.reason?.message}</p>
           </div>
 
           <button type="submit" className="btn btn-primary">
             Delete
           </button>
-
         </form>
-
       </div>
-
     </>
   );
 }

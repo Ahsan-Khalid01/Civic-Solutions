@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function ViewResidents() {
+  const [residents, setResidents] = useState([]);
+
+  useEffect(() => {
+    const data = [
+      { id: "U-001", name: "Ahmed Khan", phone: "0300-1234567", area: "Gulberg, Lahore", issuesFiled: 3, joinedDate: "2025-01-15" },
+      { id: "U-002", name: "Sara Ahmed", phone: "0311-9876543", area: "DHA Phase 5", issuesFiled: 1, joinedDate: "2025-02-03" },
+      { id: "U-003", name: "Bilal Malik", phone: "0333-5556677", area: "Johar Town", issuesFiled: 2, joinedDate: "2025-02-18" },
+      { id: "U-004", name: "Fatima Riaz", phone: "0321-4445566", area: "Model Town", issuesFiled: 1, joinedDate: "2025-03-05" },
+      { id: "U-005", name: "Usman Ali", phone: "0345-7778899", area: "Bahria Town", issuesFiled: 4, joinedDate: "2025-03-12" },
+    ];
+    setResidents(data);
+  }, []);
+
   return (
     <div>
-      <h2> All Residents</h2>
-
+      <h2>All Residents</h2>
       <table border="1" cellPadding="8" cellSpacing="0" width="100%">
         <thead>
           <tr>
@@ -17,46 +29,16 @@ function ViewResidents() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>U-001</td>
-            <td>Ahmed Khan</td>
-            <td>0300-1234567</td>
-            <td>Gulberg, Lahore</td>
-            <td>3</td>
-            <td>2025-01-15</td>
-          </tr>
-          <tr>
-            <td>U-002</td>
-            <td>Sara Ahmed</td>
-            <td>0311-9876543</td>
-            <td>DHA Phase 5</td>
-            <td>1</td>
-            <td>2025-02-03</td>
-          </tr>
-          <tr>
-            <td>U-003</td>
-            <td>Bilal Malik</td>
-            <td>0333-5556677</td>
-            <td>Johar Town</td>
-            <td>2</td>
-            <td>2025-02-18</td>
-          </tr>
-          <tr>
-            <td>U-004</td>
-            <td>Fatima Riaz</td>
-            <td>0321-4445566</td>
-            <td>Model Town</td>
-            <td>1</td>
-            <td>2025-03-05</td>
-          </tr>
-          <tr>
-            <td>U-005</td>
-            <td>Usman Ali</td>
-            <td>0345-7778899</td>
-            <td>Bahria Town</td>
-            <td>4</td>
-            <td>2025-03-12</td>
-          </tr>
+          {residents.map((resident) => (
+            <tr key={resident.id}>
+              <td>{resident.id}</td>
+              <td>{resident.name}</td>
+              <td>{resident.phone}</td>
+              <td>{resident.area}</td>
+              <td>{resident.issuesFiled}</td>
+              <td>{resident.joinedDate}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
