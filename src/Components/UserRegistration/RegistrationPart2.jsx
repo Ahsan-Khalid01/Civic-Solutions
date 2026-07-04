@@ -52,7 +52,7 @@ function RegistrationPart2() {
             <br />
 
             <div className="mb-3">
-              <label htmlfor="city" className="form-label">
+              <label htmlFor="city" className="form-label">
                 City
               </label>
               <input
@@ -66,7 +66,7 @@ function RegistrationPart2() {
             </div>
 
             <div className="mb-3">
-              <label htmlfor="area" className="form-label">
+              <label htmlFor="area" className="form-label">
                 Area/Locality
               </label>
               <input
@@ -80,7 +80,7 @@ function RegistrationPart2() {
             </div>
 
             <div className="mb-3">
-              <label htmlfor="address" className="form-label">
+              <label htmlFor="address" className="form-label">
                 Street Address
               </label>
               <input
@@ -94,7 +94,7 @@ function RegistrationPart2() {
             </div>
 
             <div className="mb-3">
-              <label htmlfor="postalCode" className="form-label">
+              <label htmlFor="postalCode" className="form-label">
                 Postal Code
               </label>
               <input

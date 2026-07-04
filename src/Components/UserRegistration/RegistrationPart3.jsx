@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 // import { RegContext } from "./RegistrationPart1";
 import { RegContext } from "./RegistrationContext";
-
+import { userRegistration } from "../../serviceApi";
+import { useState } from "react";
+//  const [serverMessage, setServerMessage] = useState(" ") ;
 const schema = z.object({
   password: z
     .string()
@@ -23,6 +25,7 @@ const schema = z.object({
 });
 
 function RegistrationPart3() {
+  const [serverMessage, setServerMessage] = useState(" ");
   const {
     register,
     handleSubmit,
@@ -31,17 +34,40 @@ function RegistrationPart3() {
   const navigate = useNavigate();
   const { regData } = useContext(RegContext);
 
-  function submit(data) {
-    const finalData = { ...regData, ...data };
-    console.log(finalData);
-    navigate("/login");
-  }
+  // const onSubmit = async (data) => {
+  //   try {
+  //     const fullData = { ...regData, ...data };
+  //     const result = await userRegistration(fullData);
+  //     setServerMessage(result.message);
+  //   } catch (error) {
+  //     setServerMessage(
+  //       "An error occurred during registration. Please try again.",
+  //     );
+  //   }
+  // };
+  const onSubmit = async (data) => {
+    try {
+      const fullData = { ...regData, ...data };
+      console.log("Sending data:", fullData); 
+      const result = await userRegistration(fullData);
+
+      if (result.success) {
+        setServerMessage(" " + result.message);
+        navigate("/login"); 
+      } else {
+        // setServerMessage(" " + result.message);
+      }
+    } catch (error) {
+      console.error(error);
+      setServerMessage("An error occurred. Please try again.");
+    }
+  };
 
   return (
     <>
       <div className="position-relative" style={{ height: "700px" }}>
         <div className="position-absolute top-50 start-50 translate-middle">
-          <form onSubmit={handleSubmit(submit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label>Registration</label>
             </div>
@@ -52,7 +78,7 @@ function RegistrationPart3() {
             </p>
 
             <div className="mb-3">
-              <label htmlfor="password" className="form-label">
+              <label htmlFor="password" className="form-label">
                 Password
               </label>
               <input
@@ -66,7 +92,7 @@ function RegistrationPart3() {
             </div>
 
             <div className="mb-3">
-              <label htmlfor="confirmPassword" className="form-label">
+              <label htmlFor="confirmPassword" className="form-label">
                 Confirmed Password
               </label>
               <input
@@ -91,10 +117,15 @@ function RegistrationPart3() {
 
             <div />
           </form>
+          {serverMessage && (
+            <p>
+              {" "}
+              <strong>{serverMessage}</strong>
+            </p>
+          )}
         </div>
       </div>
     </>
   );
 }
-
 export default RegistrationPart3;

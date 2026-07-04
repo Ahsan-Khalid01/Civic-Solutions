@@ -5,11 +5,17 @@ import router from "./router.jsx";
 import AdminContextProvider from "./Components/Admin Side/AdminContext.jsx";
 import RegistrationContextProvider from "./Components/UserRegistration/RegistrationContext.jsx";
 
+// 1. IMPORT YOUR USER CONTEXT HERE
+import UserContextProvider from "./Components/User Side/userContext.jsx";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AdminContextProvider>
       <RegistrationContextProvider>
-        <RouterProvider router={router} />
+        {/* 2. WRAP YOUR APP IN THE USER CONTEXT PROVIDER */}
+        <UserContextProvider>
+          <RouterProvider router={router} />
+        </UserContextProvider>
       </RegistrationContextProvider>
     </AdminContextProvider>
   </StrictMode>

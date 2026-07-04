@@ -1,10 +1,18 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+// import { UserContext } from "../context/UserContext"; // Adjust path if needed
+import { UserContext } from "./User Side/userContext";
 
 function UserLogin() {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+  const { handleLogin } = useContext(UserContext);
 
   function submit(data) {
     console.log(data);
+    handleLogin(data.email); 
+    navigate("/userdashboard");
   }
 
   return (

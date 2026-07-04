@@ -8,7 +8,6 @@ import DepartmentsSection from "./Components/Landing page/DepartmentsSection";
 import NewsSection from "./Components/Landing page/NewsSection";
 
 import UserLogin from "./Components/UserLogin";
-// import RegistrationPart1 from "./Components/UserRegistration/RegistrationPart1";
 import AdminLogin from "./Components/Admin Side/AdminLogin";
 import DepartmentLogin from "./Components/Department Side/DepartmentLogin";
 import LoginCards from "./Components/Landing page/LoginCards";
@@ -25,36 +24,47 @@ import RegistrationPart1 from "./Components/UserRegistration/RegistrationPart1";
 import RegistrationPart2 from "./Components/UserRegistration/RegistrationPart2";
 import RegistrationPart3 from "./Components/UserRegistration/RegistrationPart3";
 
+// User Imports
+import UserLayout from "./Components/User Side/UserLayout";
+import UserDashboard  from "./Components/User Side/UserDashboard";
+import ReportIssue   from "./Components/User Side/ReportIssue";
+import MyComplaints  from "./Components/User Side/MyComplaints";
+import TrackIssue    from "./Components/User Side/TrackIssue";
+import MyProfile     from "./Components/User Side/MyProfile";
+
 const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
-
   { path: "/features", element: <Feature /> },
   { path: "/statistics", element: <Statistic /> },
   { path: "/howitworks", element: <HowItWorks /> },
-
   { path: "/departments", element: <DepartmentsSection /> },
-    { path: "/newssection", element: <NewsSection /> },
-
+  { path: "/newssection", element: <NewsSection /> },
   { path: "/login", element: <LoginCards /> },
-
   { path: "/userlogin", element: <UserLogin /> },
   { path: "/register", element: <RegistrationPart1 /> },
-
   { path: "/adminlogin", element: <AdminLogin /> },
   { path: "/departmentlogin", element: <DepartmentLogin /> },
-
   { path: "/admindashboard", element: <AdminDashboard /> },
-
   { path: "/viewissues", element: <ViewIssues /> },
   { path: "/viewdepartments", element: <ViewDepartments /> },
   { path: "/adddepartment", element: <AddDepartment /> },
   { path: "/modifydepartment", element: <Modify /> },
   { path: "/deletedepartment", element: <DeleteForm /> },
   { path: "/viewresidents", element: <ViewResidents /> },
+  { path: "/register/step2", element: <RegistrationPart2 /> },
+  { path: "/register/step3", element: <RegistrationPart3 /> },
 
-// { path: "/register", element: <RegistrationPart1 /> },
-{ path: "/register/step2", element: <RegistrationPart2 /> },
-{ path: "/register/step3", element: <RegistrationPart3 /> },
+  // Grouped User Routes sharing one single Context Provider instance
+  {
+    element: <UserLayout />,
+    children: [
+      { path: "/userdashboard", element: <UserDashboard /> },
+      { path: "/reportissue",   element: <ReportIssue /> },
+      { path: "/mycomplaints",  element: <MyComplaints /> },
+      { path: "/trackissue",    element: <TrackIssue /> },
+      { path: "/myprofile",     element: <MyProfile /> },
+    ],
+  },
 ]);
 
 export default router;

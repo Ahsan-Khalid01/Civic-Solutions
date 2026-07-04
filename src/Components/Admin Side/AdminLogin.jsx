@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AdminContext } from "./AdminContext";
+import { useState } from "react"; 
+
+// Match your router path exactly:
+const DASHBOARD_ROUTE = "/admindashboard"; 
 
 const schema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -13,29 +15,38 @@ const schema = z.object({
 });
 
 function AdminLogin() {
+  const [serverMessage, setServerMessage] = useState(""); 
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
+  
   const navigate = useNavigate();
-  const { handleLogin } = useContext(AdminContext);
-
-  function submit(data) {
-    console.log("Validated Data:", data);
-    handleLogin(data.email);
-    navigate("/admindashboard");
-  }
+  
+  const onSubmit = async (data) => {
+    try {
+      setServerMessage("✅ Logging in...");
+      
+      // Forces navigation directly to your /admindashboard route string
+      navigate(DASHBOARD_ROUTE); 
+    } catch (error) {
+      console.error("Login Submission Error:", error);
+      setServerMessage("An unexpected error occurred.");
+    }
+  };
 
   return (
     <>
       <div className="position-absolute top-50 start-50 translate-middle">
-        <form onSubmit={handleSubmit(submit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label>Admin Login</label>
+            <label className="fw-bold fs-4">Admin Login</label>
           </div>
           <br />
 
+          {/* Email Field */}
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email address
@@ -50,6 +61,7 @@ function AdminLogin() {
             <p style={{ color: "Red" }}>{errors.email?.message}</p>
           </div>
 
+          {/* Password Field */}
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
               Password
@@ -64,10 +76,18 @@ function AdminLogin() {
             <p style={{ color: "Red" }}>{errors.password?.message}</p>
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          {/* Submit Button */}
+          <button type="submit" className="btn btn-primary w-100">
             Login
           </button>
         </form>
+
+        {/* Message Output Container */}
+        {serverMessage && (
+          <p className="mt-3 text-center">
+            <strong>{serverMessage}</strong>
+          </p>
+        )}
       </div>
     </>
   );

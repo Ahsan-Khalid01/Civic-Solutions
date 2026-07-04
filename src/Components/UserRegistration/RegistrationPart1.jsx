@@ -51,7 +51,7 @@ function RegistrationPart1() {
 
             {/* Full Name */}
             <div className="mb-3">
-              <label html for="fullname" className="form-label">
+              <label htmlFor="fullname" className="form-label">
                 Full Name
               </label>
               <input
@@ -66,7 +66,7 @@ function RegistrationPart1() {
 
             {/* CNIC */}
             <div className="mb-3">
-              <label html for="cnic" className="form-label">
+              <label htmlFor="cnic" className="form-label">
                 CNIC
               </label>
               <input
@@ -81,7 +81,7 @@ function RegistrationPart1() {
 
             {/* DOB */}
             <div className="mb-3">
-              <label html for="dob" className="form-label">
+              <label htmlFor="dob" className="form-label">
                 Date of Birth
               </label>
               <br />
@@ -91,14 +91,12 @@ function RegistrationPart1() {
 
             {/* Gender */}
             <div className="mb-3">
-              <label html for="gender" className="form-label">
+              <label htmlFor="gender" className="form-label">
                 Gender
               </label>
               <br />
 
-              <label html for="male">
-                Male
-              </label>
+              <label htmlFor="male">Male</label>
               <input
                 type="radio"
                 name="gender"
@@ -108,9 +106,7 @@ function RegistrationPart1() {
               />
               <p style={{ color: "Red" }}>{errors.gender?.message}</p>
 
-              <label html for="female">
-                Female
-              </label>
+              <label htmlFor="female">Female</label>
               <input
                 type="radio"
                 name="gender"
@@ -123,7 +119,7 @@ function RegistrationPart1() {
 
             {/* Phone */}
             <div className="mb-3">
-              <label html for="phone" className="form-label">
+              <label htmlFor="phone" className="form-label">
                 Phone Number
               </label>
               <input
@@ -138,7 +134,7 @@ function RegistrationPart1() {
 
             {/* Email */}
             <div className="mb-3">
-              <label html for="email" className="form-label">
+              <label htmlFor="email" className="form-label">
                 Email Address
               </label>
               <input
@@ -153,7 +149,7 @@ function RegistrationPart1() {
 
             {/* Image */}
             <div className="mb-3">
-              <label html for="image" className="form-label">
+              <label htmlFor="image" className="form-label">
                 Upload Picture
               </label>
               <br />
@@ -169,7 +165,7 @@ function RegistrationPart1() {
                 {...register("terms")}
               />
               <p style={{ color: "Red" }}>{errors.terms?.message}</p>
-              <label className="form-check-label" html for="terms">
+              <label className="form-check-label" htmlFor="terms">
                 I agree to the terms and conditions
               </label>
             </div>
