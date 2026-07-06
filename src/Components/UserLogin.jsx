@@ -3,17 +3,24 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 // import { UserContext } from "../context/UserContext"; // Adjust path if needed
 import { UserContext } from "./User Side/userContext";
+import { userLogin } from "../serviceApi";
 
 function UserLogin() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { handleLogin } = useContext(UserContext);
 
-  function submit(data) {
-    console.log(data);
-    handleLogin(data.email); 
-    navigate("/userdashboard");
-  }
+  // function submit(data) {
+  //   console.log(data);
+  //   handleLogin(data.email); 
+  //   navigate("/userdashboard");
+  // }
+
+
+  async function submit(data) {
+  const res = await userLogin(data);
+  if (res.success) { handleLogin(data.email); navigate("/userdashboard"); }
+}
 
   return (
     <>

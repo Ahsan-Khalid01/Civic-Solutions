@@ -3,8 +3,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react"; 
+import { adminLogin } from "../../serviceApi";
 
-// Match your router path exactly:
+
+
 const DASHBOARD_ROUTE = "/admindashboard"; 
 
 const schema = z.object({
@@ -25,13 +27,28 @@ function AdminLogin() {
   
   const navigate = useNavigate();
   
-  const onSubmit = async (data) => {
-    try {
-      setServerMessage("✅ Logging in...");
+  // const onSubmit = async (data) => {
+  //   try {
+  //     setServerMessage(" Logging in...");
       
-      // Forces navigation directly to your /admindashboard route string
-      navigate(DASHBOARD_ROUTE); 
-    } catch (error) {
+  //     
+  //     navigate(DASHBOARD_ROUTE); 
+  //   } catch (error) {
+  //     console.error("Login Submission Error:", error);
+  //     setServerMessage("An unexpected error occurred.");
+  //   }
+  // };
+
+   const onSubmit = async (data) => {
+    try {
+      setServerMessage("Logging in...");
+      
+      
+      navigate(DASHBOARD_ROUTE);
+
+    } 
+    catch (error)
+     {
       console.error("Login Submission Error:", error);
       setServerMessage("An unexpected error occurred.");
     }

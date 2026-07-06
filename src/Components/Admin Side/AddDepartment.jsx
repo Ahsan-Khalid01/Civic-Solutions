@@ -2,10 +2,12 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { addDepartment } from "../../serviceApi";
 
 const departmentSchema = z.object({
   departmentName: z.string().min(2, { message: "Department name must be at least 2 characters long" }).max(100, { message: "Department name must be at most 100 characters long" }),
   city: z.string().min(2, { message: "City must be at least 2 characters long" }).max(100, { message: "City must be at most 100 characters long" }),
+  id: z.string().min(2,{message: "Id minimum 2 characters"}).max(15,{message: "id  must be maximum `15 characters"}),
   postalCode: z.string().min(5, { message: "Postal code must be at least 5 characters long" }).max(10, { message: "Postal code must be at most 10 characters long" }),
   category: z.string().min(2, { message: "Category must be at least 2 characters long" }).max(100, { message: "Category must be at most 100 characters long" }),
   headName: z.string().min(2, { message: "Department head name must be at least 2 characters long" }).max(100, { message: "Department head name must be at most 100 characters long" }),
@@ -20,9 +22,16 @@ function AddDepartment() {
     resolver: zodResolver(departmentSchema)
   });
 
-  function submit(data) {
-    console.log(data);
-  }
+  // function submit(data) {
+  //   console.log(data);
+  // }
+
+
+
+  async function submit(data) {
+  const res = await addDepartment(data);
+  console.log(res);
+}
 
   return (
     <>
@@ -34,7 +43,7 @@ function AddDepartment() {
           <br />
 
           <div className="mb-3">
-            <label htmlfor="departmentName" className="form-label">
+            <label htmlFor="departmentName" className="form-label">
               Department Name
             </label>
             <input
@@ -48,7 +57,7 @@ function AddDepartment() {
           </div>
 
           <div className="mb-3">
-            <label htmlfor="city" className="form-label">
+            <label htmlFor="city" className="form-label">
               City
             </label>
             <input
@@ -62,8 +71,24 @@ function AddDepartment() {
           </div>
             
 
+
+              <div className="mb-3">
+            <label htmlFor="city" className="form-label">
+              ID
+            </label>
+            <input
+              type="text"
+              id="id"
+              className="form-control"
+              placeholder="Enter unique Id"
+              {...register("id")}
+            />
+            <p style={{ color: "Red" }}>{errors.id?.message}</p>
+          </div>
+            
+
           <div className="mb-3">
-            <label htmlfor="postalCode" className="form-label">
+            <label htmlFor="postalCode" className="form-label">
               Postal Code
             </label>
             <input
@@ -77,7 +102,7 @@ function AddDepartment() {
           </div>
 
           <div className="mb-3">
-            <label htmlfor="category" className="form-label">
+            <label htmlFor="category" className="form-label">
               Category
             </label>
             <input
@@ -91,7 +116,7 @@ function AddDepartment() {
           </div>
 
           <div className="mb-3">
-            <label htmlfor="headName" className="form-label">
+            <label htmlFor="headName" className="form-label">
               Department Head Name
             </label>
             <input
@@ -105,7 +130,7 @@ function AddDepartment() {
           </div>
 
           <div className="mb-3">
-            <label htmlfor="officialPhone" className="form-label">
+            <label htmlFor="officialPhone" className="form-label">
               Official Phone Number
             </label>
             <input
@@ -119,7 +144,7 @@ function AddDepartment() {
           </div>
 
           <div className="mb-3">
-            <label htmlfor="emergencyPhone" className="form-label">
+            <label htmlFor="emergencyPhone" className="form-label">
               Emergency Phone Number
             </label>
             <input
@@ -133,7 +158,7 @@ function AddDepartment() {
           </div>
 
           <div className="mb-3">
-            <label htmlfor="loginId" className="form-label">
+            <label htmlFor="loginId" className="form-label">
               Login ID
             </label>
             <input
@@ -147,7 +172,7 @@ function AddDepartment() {
           </div>
 
           <div className="mb-3">
-            <label htmlfor="password" className="form-label">
+            <label htmlFor="password" className="form-label">
               Temporary Password
             </label>
             <input

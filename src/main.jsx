@@ -7,6 +7,7 @@ import RegistrationContextProvider from "./Components/UserRegistration/Registrat
 
 // 1. IMPORT YOUR USER CONTEXT HERE
 import UserContextProvider from "./Components/User Side/userContext.jsx";
+import DepartmentContextProvider from "./Components/Department Side/DepartmentContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -14,7 +15,9 @@ createRoot(document.getElementById("root")).render(
       <RegistrationContextProvider>
         {/* 2. WRAP YOUR APP IN THE USER CONTEXT PROVIDER */}
         <UserContextProvider>
-          <RouterProvider router={router} />
+          <DepartmentContextProvider>
+            <RouterProvider router={router} />
+          </DepartmentContextProvider>
         </UserContextProvider>
       </RegistrationContextProvider>
     </AdminContextProvider>

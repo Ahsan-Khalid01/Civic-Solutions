@@ -1,218 +1,94 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-const schema = z.object({
-  departmentName: z.string().min(2, { message: "Department name must be at least 2 characters long" }),
-  city: z.string().min(2, { message: "City name must be at least 2 characters long" }),
-  postalCode: z.string().regex(/^[0-9]{5}$/, { message: "Invalid postal code" }),
-  category: z.string().min(2, { message: "Category must be at least 2 characters long" }),
-  headName: z.string().min(2, { message: "Head name must be at least 2 characters long" }),
-  contact: z.string().email({ message: "Invalid email address" }),
-});
+import { useState } from "react";
+import { viewDepartments, updateDepartment } from "../../serviceApi";
 
 function Modify() {
-  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(schema) });
+  const [deptId, setDeptId] = useState("");
+  const [found, setFound] = useState(false);
+  const [serverMessage, setServerMessage] = useState("");
+  const { register, handleSubmit, reset } = useForm();
 
-  function submit(data) {
-    console.log(data);
+  async function findDept()
+   {
+    const departments = await viewDepartments();
+    const dept = departments.find((d) => String(d.id) === deptId);
+    if (dept)
+       {
+      reset(dept);
+      setFound(true);
+    }
+     else {
+      setFound(false);
+      setServerMessage(" Department not found.");
+    }
+  }
+
+  async function submit(data)
+   {
+    const res = await updateDepartment({ ...data, id: deptId });
+    setServerMessage(res.success ? " " + res.message : " " + res.message);
   }
 
   return (
-    <>
-      <div className="position-absolute top-50 start-50 translate-middle">
+    <div className="position-absolute top-50 start-50 translate-middle">
+      <label>Modify Department</label>
+      <br />
+      <br />
+
+      <div className="mb-3">
+        <label>Department ID</label>
+        <input
+          className="form-control"
+          value={deptId}
+          onChange={(e) => setDeptId(e.target.value)}
+          placeholder="Enter Department ID"
+        />
+        <button
+          type="button"
+          className="btn btn-secondary mt-2"
+          onClick={findDept}
+        >
+          Find
+        </button>
+      </div>
+
+      {found && (
         <form onSubmit={handleSubmit(submit)}>
-          <div>
-            <label>Modify Department</label>
-          </div>
-          <br />
-
           <div className="mb-3">
-            <label htmlfor="departmentName" className="form-label">
-              Department Name
-            </label>
-            <input
-              type="text"
-              id="departmentName"
-              className="form-control"
-              placeholder="Enter Department Name"
-              {...register("departmentName")}
-            />
-            <p style={{ color: "Red" }}>{errors.departmentName?.message}</p>
+            <label>Department Name</label>
+            <input className="form-control" {...register("departmentName")} />
           </div>
-
           <div className="mb-3">
-            <label htmlfor="departmentId" className="form-label">
-              Department ID
-            </label>
-            <input
-              type="text"
-              id="departmentId"
-              className="form-control"
-              placeholder="Cant Modify"
-              disabled
-            />
-            <p style={{ color: "Red" }}>{errors.departmentId?.message}</p>
+            <label>City</label>
+            <input className="form-control" {...register("city")} />
           </div>
-
           <div className="mb-3">
-            <label htmlfor="city" className="form-label">
-              City
-            </label>
-            <input
-              type="text"
-              id="city"
-              className="form-control"
-              placeholder="Enter City Name"
-              {...register("city")}
-            />
-            <p style={{ color: "Red" }}>{errors.city?.message}</p>
+            <label>Postal Code</label>
+            <input className="form-control" {...register("postalCode")} />
           </div>
-          
-
           <div className="mb-3">
-            <label htmlfor="postalCode" className="form-label">
-              Postal Code
-            </label>
-            <input
-              type="text"
-              id="postalCode"
-              className="form-control"
-              placeholder="Enter City Postal Code"
-              {...register("postalCode")}
-            />
-            <p style={{ color: "Red" }}>{errors.postalCode?.message}</p>
+            <label>Category</label>
+            <input className="form-control" {...register("category")} />
           </div>
-
           <div className="mb-3">
-            <label htmlfor="category" className="form-label">
-              Category
-            </label>
-            <input
-              type="text"
-              id="category"
-              className="form-control"
-              placeholder="Select Category"
-              {...register("category")}
-            />
-            <p style={{ color: "Red" }}>{errors.category?.message}</p>
+            <label>Head Name</label>
+            <input className="form-control" {...register("headName")} />
           </div>
-
           <div className="mb-3">
-            <label htmlfor="headName" className="form-label">
-              Department Head Name
-            </label>
-            <input
-              type="text"
-              id="headName"
-              className="form-control"
-              placeholder="Enter Department Head Name"
-              {...register("headName")}
-            />
-            <p style={{ color: "Red" }}>{errors.headName?.message}</p>
+            <label>Official Phone</label>
+            <input className="form-control" {...register("officialPhone")} />
           </div>
-
-          <div className="mb-3">
-            <label htmlfor="contact" className="form-label">
-              Contact
-            </label>
-            <input
-              type="text"
-              id="contact"
-              className="form-control"
-              placeholder="Enter Contact"
-              {...register("contact")}
-            />
-            <p style={{ color: "Red" }}>{errors.contact?.message}</p>
-          </div>
-           
-
-          <div className="mb-3">
-            <label htmlfor="category" className="form-label">
-              Category
-            </label>
-            <input
-              type="text"
-              id="category"
-              className="form-control"
-              placeholder="Select Category"
-              {...register("category")}
-            />
-            <p style={{ color: "Red" }}>{errors.category?.message}</p>
-          </div>
-
-          <div className="mb-3">
-            <label htmlfor="headName" className="form-label">
-              Department Head Name
-            </label>
-            <input
-              type="text"
-              id="headName"
-              className="form-control"
-              placeholder="Enter Department Head Name"
-              {...register("headName")}
-            />
-            <p style={{ color: "Red" }}>{errors.headName?.message}</p>
-          </div>
-
-          <div className="mb-3">
-            <label htmlfor="contact" className="form-label">
-              Contact
-            </label>
-            <input
-              type="text"
-              id="contact"
-              className="form-control"
-              placeholder="Enter Contact"
-              {...register("contact")}
-            />
-            <p style={{ color: "Red" }}>{errors.contact?.message}</p>
-          </div>
-
-          <div className="mb-3">
-            <label htmlfor="status" className="form-label">
-              Status
-            </label>
-            <br />
-
-            <label htmlfor="inactive">Inactive</label>
-            <input
-              id="inactive"
-              type="radio"
-              name="status"
-              value="inactive"
-              {...register("status")}
-            />
-            <p style={{ color: "Red" }}>{errors.status?.message}</p>
-
-            <label htmlfor="active">Active</label>
-            <input
-            id="active"
-              type="radio"
-              name="status"
-              value="active"
-              {...register("status")}
-            />
-            <p style={{ color: "Red" }}>{errors.status?.message}</p>
-
-            <label htmlfor="suspend">Suspend</label>
-            <input
-              id="suspend"
-              type="radio"
-              name="status"
-              value="suspend"
-              {...register("status")}
-            />
-            <p style={{ color: "Red" }}>{errors.status?.message}</p>
-          </div>
-
           <button type="submit" className="btn btn-primary">
             Update
           </button>
         </form>
-      </div>
-    </>
+      )}
+      {serverMessage && (
+        <p>
+          <strong>{serverMessage}</strong>
+        </p>
+      )}
+    </div>
   );
 }
 

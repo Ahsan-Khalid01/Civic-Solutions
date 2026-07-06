@@ -3,13 +3,15 @@ import { createContext, useState } from "react";
 export const UserContext = createContext();
 
 function UserContextProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem("userEmail") || null);
 
   function handleLogin(email) {
-    setUser({ name: email });
+    localStorage.setItem("userEmail", email);
+    setUser(email);
   }
 
   function handleLogout() {
+    localStorage.removeItem("userEmail");
     setUser(null);
   }
 

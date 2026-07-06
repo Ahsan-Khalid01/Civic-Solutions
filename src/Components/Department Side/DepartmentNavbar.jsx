@@ -1,26 +1,25 @@
 import { NavLink, Link } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "./userContext";
+import { DepartmentContext } from "./DepartmentContext";
 
-function UserNavbar() {
-  const { user, handleLogout } = useContext(UserContext);
+function DepartmentNavbar() {
+  const { department, handleLogout } = useContext(DepartmentContext);
 
   const navLinks = [
-    { to: "/userdashboard", label: "Dashboard" },
-    { to: "/reportissue", label: "Report Issue" },
-    { to: "/mycomplaints", label: "My Complaints" },
-    { to: "/trackissue", label: "Track Issue" },
+    { to: "/departmentdashboard", label: "Dashboard" },
+    { to: "/viewassignedissues", label: "Assigned Issues" },
+    { to: "/updateissuestatus", label: "Update Status" },
+    { to: "/departmentprofile", label: "Profile" },
   ];
 
-  // const displayName = user?.name || "Resident";
-  const displayName = user || "Resident";
-  const initial = displayName.trim().charAt(0).toUpperCase() || "R";
+  const displayName = department?.name || "Department";
+  const initial = displayName.trim().charAt(0).toUpperCase() || "D";
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top py-2">
       <div className="container-fluid px-3 px-lg-5">
         <Link
-          to="/userdashboard"
+          to="/departmentdashboard"
           className="navbar-brand d-flex align-items-center gap-2"
         >
           <img
@@ -42,12 +41,12 @@ function UserNavbar() {
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#userNavbar"
+          data-bs-target="#departmentNavbar"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="userNavbar">
+        <div className="collapse navbar-collapse" id="departmentNavbar">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             {navLinks.map((link) => (
               <li key={link.label} className="nav-item">
@@ -78,7 +77,7 @@ function UserNavbar() {
             </div>
             <Link
               className="btn btn-warning btn-sm fw-semibold"
-              to="/userlogin"
+              to="/departmentlogin"
               onClick={handleLogout}
             >
               Logout
@@ -90,4 +89,4 @@ function UserNavbar() {
   );
 }
 
-export default UserNavbar;
+export default DepartmentNavbar;

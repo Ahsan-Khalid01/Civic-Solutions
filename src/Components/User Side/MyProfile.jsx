@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "./userContext";
+import { viewResidents, updateUser } from "../../serviceApi";
 
 const schema = z.object({
   fullname: z
@@ -18,26 +20,47 @@ const schema = z.object({
 
 function MyProfile() {
   const [serverMessage, setServerMessage] = useState("");
+  const { user } = useContext(UserContext);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      fullname: "Ahmed Khan",
-      cnic: "3520112345671",
-      phone: "03001234567",
-      email: "ahmed@example.com",
-      city: "Lahore",
-      area: "Gulberg III",
-    },
-  });
+  } = useForm({ resolver: zodResolver(schema) });
 
-  function submit(data) {
-    console.log("Profile Updated:", data);
-    setServerMessage("✅ Profile updated successfully!");
+  useEffect(() => {
+    viewResidents().then((residents) => {
+      const me = residents.find((r) => r.Email === user);
+      if (me) {
+        reset({
+          fullname: me.FullName,
+          cnic: me.CNIC,
+          phone: me.Phone,
+          email: me.Email,
+          city: me.City,
+          area: me.Area,
+        });
+      }
+    });
+  }, [user]);
+
+  async function submit(data) {
+    const res = await updateUser({
+      Email: data.email,
+      Phone: data.phone,
+      City: data.city,
+      Area: data.area,
+      Street: data.area,
+    });
+
+    if (res.success)
+       {
+      setServerMessage(" Profile updated successfully!");
+    } 
+    else {
+      setServerMessage(" " + res.message);
+    }
   }
 
   return (
@@ -51,7 +74,6 @@ function MyProfile() {
             </p>
 
             <form onSubmit={handleSubmit(submit)}>
-              {/* Full Name */}
               <div className="mb-3">
                 <label htmlFor="fullname" className="form-label">
                   Full Name
@@ -65,7 +87,6 @@ function MyProfile() {
                 <p style={{ color: "Red" }}>{errors.fullname?.message}</p>
               </div>
 
-              {/* CNIC */}
               <div className="mb-3">
                 <label htmlFor="cnic" className="form-label">
                   CNIC Number
@@ -76,11 +97,11 @@ function MyProfile() {
                   className="form-control"
                   placeholder="13 digits without dashes"
                   {...register("cnic")}
+                  disabled
                 />
                 <p style={{ color: "Red" }}>{errors.cnic?.message}</p>
               </div>
 
-              {/* Phone */}
               <div className="mb-3">
                 <label htmlFor="phone" className="form-label">
                   Phone Number
@@ -94,7 +115,6 @@ function MyProfile() {
                 <p style={{ color: "Red" }}>{errors.phone?.message}</p>
               </div>
 
-              {/* Email */}
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
                   Email Address
@@ -104,11 +124,11 @@ function MyProfile() {
                   id="email"
                   className="form-control"
                   {...register("email")}
+                  disabled
                 />
                 <p style={{ color: "Red" }}>{errors.email?.message}</p>
               </div>
 
-              {/* City */}
               <div className="mb-3">
                 <label htmlFor="city" className="form-label">
                   City
@@ -122,7 +142,6 @@ function MyProfile() {
                 <p style={{ color: "Red" }}>{errors.city?.message}</p>
               </div>
 
-              {/* Area */}
               <div className="mb-3">
                 <label htmlFor="area" className="form-label">
                   Area / Locality

@@ -32,6 +32,15 @@ import MyComplaints  from "./Components/User Side/MyComplaints";
 import TrackIssue    from "./Components/User Side/TrackIssue";
 import MyProfile     from "./Components/User Side/MyProfile";
 
+import EditIssue from "./Components/User Side/EditIssue";
+
+// Department Imports
+import DepartmentLayout from "./Components/Department Side/DepartmentLayout";
+import DepartmentDashboard from "./Components/Department Side/DepartmentDashboard";
+import ViewAssignedIssues from "./Components/Department Side/ViewAssignedIssues";
+import UpdateIssueStatus from "./Components/Department Side/UpdateIssueStatus";
+import DepartmentProfile from "./Components/Department Side/DepartmentProfile";
+
 const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
   { path: "/features", element: <Feature /> },
@@ -53,8 +62,8 @@ const router = createBrowserRouter([
   { path: "/viewresidents", element: <ViewResidents /> },
   { path: "/register/step2", element: <RegistrationPart2 /> },
   { path: "/register/step3", element: <RegistrationPart3 /> },
-
-  // Grouped User Routes sharing one single Context Provider instance
+{ path: "/editissue/:id", element: <EditIssue /> },
+  
   {
     element: <UserLayout />,
     children: [
@@ -63,6 +72,17 @@ const router = createBrowserRouter([
       { path: "/mycomplaints",  element: <MyComplaints /> },
       { path: "/trackissue",    element: <TrackIssue /> },
       { path: "/myprofile",     element: <MyProfile /> },
+    ],
+  },
+
+
+  {
+    element: <DepartmentLayout />,
+    children: [
+      { path: "/departmentdashboard", element: <DepartmentDashboard /> },
+      { path: "/viewassignedissues",  element: <ViewAssignedIssues /> },
+      { path: "/updateissuestatus",   element: <UpdateIssueStatus /> },
+      { path: "/departmentprofile",   element: <DepartmentProfile /> },
     ],
   },
 ]);
