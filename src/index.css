@@ -1,0 +1,320 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #212529;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+a,
+button,
+.btn,
+.nav-link,
+.card,
+input,
+select,
+textarea {
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar {
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  margin-bottom: 0;
+}
+.nav-link {
+  font-weight: 500;
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: #ffc107;
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+#home {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.55rem 1.4rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+.btn-primary {
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.25);
+}
+.btn-warning {
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+}
+.btn-success {
+  box-shadow: 0 2px 8px rgba(25, 135, 84, 0.25);
+}
+
+.carousel-caption h3 {
+  font-weight: 700;
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
+}
+.carousel-caption p {
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+.card {
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+}
+.card:hover {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+.card-body {
+  padding: 1.5rem;
+}
+.card-title {
+  font-weight: 700;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  padding: 0.65rem 0.9rem;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.12);
+}
+.form-label {
+  font-weight: 500;
+  color: #344054;
+}
+form:not(.d-flex) {
+  background: #ffffff;
+  padding: 2.5rem 2.75rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.09);
+}
+form:not(.d-flex) > div:first-child label {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.table {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+.table thead {
+  background-color: #212529;
+  color: #fff;
+}
+.table thead th {
+  font-weight: 600;
+  border: none;
+  padding: 0.9rem 1rem;
+}
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+.table td {
+  vertical-align: middle;
+  padding: 0.8rem 1rem;
+}
+
+section:not(#home) {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer h5,
+.bg-dark.text-white.text-center h5 {
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ced4da;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #adb5bd;
+}
+
+/* FORMS DEEP POLISH */
+form:not(.d-flex) input[type="text"],
+form:not(.d-flex) input[type="email"],
+form:not(.d-flex) input[type="tel"],
+form:not(.d-flex) input[type="password"],
+form:not(.d-flex) input[type="number"],
+form:not(.d-flex) input[type="date"] {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  padding: 0.6rem 0.9rem;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: #fff;
+}
+form:not(.d-flex) input[type="date"]:focus,
+form:not(.d-flex) input[type="text"]:focus,
+form:not(.d-flex) input[type="email"]:focus,
+form:not(.d-flex) input[type="tel"]:focus,
+form:not(.d-flex) input[type="number"]:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.12);
+}
+
+form:not(.d-flex) input[type="radio"],
+form:not(.d-flex) input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  margin: 0 6px 0 14px;
+  accent-color: #0d6efd;
+  cursor: pointer;
+  vertical-align: middle;
+}
+form:not(.d-flex) input[type="radio"]:first-of-type {
+  margin-left: 0;
+}
+form:not(.d-flex) label {
+  cursor: pointer;
+  font-weight: 500;
+  color: #344054;
+}
+
+form:not(.d-flex) input[type="file"] {
+  display: block;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+form:not(.d-flex) input[type="file"]::file-selector-button {
+  border: none;
+  background: #0d6efd;
+  color: #fff;
+  padding: 0.5rem 1.1rem;
+  border-radius: 6px;
+  margin-right: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+form:not(.d-flex) input[type="file"]::file-selector-button:hover {
+  background: #0b5ed7;
+}
+
+form:not(.d-flex) .form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+form:not(.d-flex) .form-check-input {
+  margin: 0.2rem 0 0 0;
+  width: 16px;
+  height: 16px;
+  accent-color: #0d6efd;
+}
+
+form:not(.d-flex) p {
+  font-size: 0.82rem;
+  margin: 0.2rem 0 0.4rem;
+  font-weight: 500;
+}
+
+form:not(.d-flex) .mb-3 {
+  margin-bottom: 1.3rem !important;
+}
+
+form:not(.d-flex) button[type="submit"] {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  margin-top: 0.75rem;
+  border-radius: 10px;
+}
+
+/* END-LEVEL POLISH — fixes off-center registration form + adds backdrop */
+.position-relative {
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+.position-absolute.top-50.start-50.translate-middle {
+  width: 100%;
+  max-width: 480px;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+body:has(.position-absolute.top-50.start-50.translate-middle) {
+  background: linear-gradient(160deg, #eef2f9 0%, #f7f8fa 60%, #eef2f9 100%);
+}
+
+form:not(.d-flex) > div:first-child {
+  text-align: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eef0f3;
+}
+form:not(.d-flex) > div:first-child label {
+  margin-bottom: 0 !important;
+}
+
+form:not(.d-flex) {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form:not(.d-flex) .mb-3:has(input[type="radio"]) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+}
+form:not(.d-flex) .mb-3:has(input[type="radio"]) > label:first-child {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}

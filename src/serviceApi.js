@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE = "https://civicsystem.rf.gd";
+const BASE = "https://civicsystem.rf.gd/api";
 
 export const userRegistration = async (data) =>
   (await axios.post(`${BASE}/userRegistration.php`, data)).data;

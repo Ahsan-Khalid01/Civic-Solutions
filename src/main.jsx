@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import router from "./router.jsx";
+import "./index.css";
 import AdminContextProvider from "./Components/Admin Side/AdminContext.jsx";
 import RegistrationContextProvider from "./Components/UserRegistration/RegistrationContext.jsx";
 

@@ -14,7 +14,7 @@ function LandingPage() {
       <Navigation />
       <Hero />
       <Feature />
-      <Statistic />
+      {/* <Statistic /> */}
       <DepartmentsSection />
        <HowItWorks />
       <LoginCards />
