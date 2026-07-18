@@ -6,9 +6,9 @@ function AdminNavbar() {
   const { user, handleLogout } = useContext(AdminContext);
 
   const navLinks = [
-    { to: "/", label: "Dashboard" },
-    { to: "", label: "Issues" },
-    { to: "", label: "Departments" },
+    { to: "/admindashboard", label: "Dashboard" },
+    { to: "/viewissues", label: "Issues" },
+    { to: "/viewdepartments", label: "Departments" },
   ];
 
   return (
@@ -45,16 +45,7 @@ function AdminNavbar() {
           ))}
         </ul>
 
-        <form className="d-flex" role="search">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button className="btn btn-outline-success" type="submit">
-            Search
-          </button>
+        <div className="d-flex align-items-center">
           {user && (
             <span className="text-warning mx-2 fw-bold">
               Welcome, {user.name}
@@ -65,70 +56,9 @@ function AdminNavbar() {
             to="/login"
             onClick={handleLogout}
           >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
             Logout
           </Link>
-        </form>
+        </div>
       </div>
     </nav>
   );

@@ -1,12 +1,11 @@
 ﻿import { Link } from "react-router-dom";
-// import logo from "../images/Landing Page/logo.png";
 
 function Navigation() {
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/features", label: "Features" },
     { to: "/howitworks", label: "How It Works" },
-    { to: "/Departments", label: "Departments" },
+    { to: "/departments", label: "Departments" },
     { to: "/statistics", label: "Statistics" },
     { to: "/newssection", label: "News" },
   ];
@@ -45,18 +44,14 @@ function Navigation() {
           ))}
         </ul>
 
-        <form className="d-flex" role="search">
-          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button className="btn btn-outline-success" type="submit">
-            Search
-          </button>
+        <div className="d-flex">
           <Link className="btn btn-warning mx-2" to="/login">
             Login
           </Link>
           <Link className="btn btn-outline-light" to="/register">
             Register
           </Link>
-        </form>
+        </div>
       </div>
     </nav>
   );

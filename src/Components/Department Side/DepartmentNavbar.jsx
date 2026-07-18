@@ -24,7 +24,7 @@ function DepartmentNavbar() {
         >
           <img
             src="/images/landing-page/logo.jpg"
-            alt="CivicTrack logo"
+            alt="Civic Issue Tracking logo"
             style={{
               width: "36px",
               height: "36px",
@@ -77,7 +77,7 @@ function DepartmentNavbar() {
             </div>
             <Link
               className="btn btn-warning btn-sm fw-semibold"
-              to="/departmentlogin"
+              to="/login"
               onClick={handleLogout}
             >
               Logout

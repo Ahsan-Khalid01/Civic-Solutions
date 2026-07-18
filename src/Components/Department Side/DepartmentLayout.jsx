@@ -1,16 +1,16 @@
 import { Outlet } from "react-router-dom";
 import DepartmentNavbar from "./DepartmentNavbar";
+import DepartmentFooter from "./DepartmentFooter";
 
-// NOTE: DepartmentContextProvider is applied once at the app level in
-// main.jsx, so it is intentionally not repeated here.
 function DepartmentLayout() {
   return (
-    <>
+    <div className="page-flex">
       <DepartmentNavbar />
       <div className="department-content">
         <Outlet />
       </div>
-    </>
+      <DepartmentFooter />
+    </div>
   );
 }
 

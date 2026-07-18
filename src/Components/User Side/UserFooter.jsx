@@ -60,21 +60,6 @@ function UserFooter() {
                   My Profile
                 </Link>
               </li>
-              <li className="mb-2">
-                <a href="#" className="text-white-50 text-decoration-none">
-                  Help Center
-                </a>
-              </li>
-              <li className="mb-2">
-                <a href="#" className="text-white-50 text-decoration-none">
-                  Contact Us
-                </a>
-              </li>
-              <li className="mb-2">
-                <a href="#" className="text-white-50 text-decoration-none">
-                  FAQs
-                </a>
-              </li>
             </ul>
           </div>
           <div className="col-md-4">
@@ -89,7 +74,8 @@ function UserFooter() {
         <hr className="border-secondary my-4" />
         <div className="d-flex flex-wrap justify-content-between small">
           <span>
-            &copy; {new Date().getFullYear()} CivicTrack. All rights reserved.
+            {/* &copy; {new Date().getFullYear()} CivicTrack. All rights reserved. */}
+            &copy; {new Date().getFullYear()} Civic Issue Tracking and Resolution System. All rights reserved.
           </span>
           <span>Resident Portal</span>
         </div>

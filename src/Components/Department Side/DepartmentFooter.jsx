@@ -54,16 +54,6 @@ function DepartmentFooter() {
                   Profile
                 </Link>
               </li>
-              <li className="mb-2">
-                <a href="#" className="text-white-50 text-decoration-none">
-                  Help Center
-                </a>
-              </li>
-              <li className="mb-2">
-                <a href="#" className="text-white-50 text-decoration-none">
-                  Contact Admin
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -81,7 +71,8 @@ function DepartmentFooter() {
 
         <div className="d-flex flex-wrap justify-content-between small">
           <span>
-            &copy; {new Date().getFullYear()} CivicTrack. All rights reserved.
+            {/* &copy; {new Date().getFullYear()} CivicTrack. All rights reserved. */}
+            &copy; {new Date().getFullYear()} Civic Issue Tracking and Resolution System. All rights reserved.
           </span>
           <span>Department Portal</span>
         </div>

@@ -318,3 +318,98 @@ form:not(.d-flex) .mb-3:has(input[type="radio"]) > label:first-child {
   width: 100%;
   margin-bottom: 0.5rem;
 }
+
+
+html, body, #root {
+  height: 100%;
+}
+
+.page-flex {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-flex > .page-content {
+  flex: 1 0 auto;
+}
+
+.user-content,
+.department-content {
+  flex: 1 0 auto;
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   PROFESSIONAL POLISH — typography signature, refined details
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600;700&display=swap');
+
+/* Serif display face for major headings only — the one deliberate
+   typographic choice that gives the site an "official/civic" feel,
+   while body text stays on the clean, readable system font. */
+h1, h2, h3,
+.navbar-brand span,
+.carousel-caption h3,
+footer h5 {
+  font-family: "Lora", Georgia, serif;
+}
+
+/* Status badges — consistent pill shape used across every dashboard table */
+.badge {
+  padding: 0.42em 0.85em;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+/* Footer links — visible hover feedback instead of static text */
+footer a.text-white-50 {
+  transition: color 0.15s ease;
+}
+footer a.text-white-50:hover {
+  color: #ffc107 !important;
+}
+
+/* Accessibility: visible keyboard focus ring everywhere */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.nav-link:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(13, 110, 253, 0.5);
+  outline-offset: 2px;
+}
+
+/* Dashboard stat cards — slightly stronger left accent, consistent everywhere */
+.card.border-start.border-4 {
+  border-left-width: 5px !important;
+}
+.card.border-start.border-4 h3 {
+  font-size: 1.9rem;
+}
+
+/* Quick-action tiles used on all three dashboards */
+.btn.py-4 {
+  border-radius: 12px;
+  font-size: 1rem;
+}
+
+/* Section heading rhythm — consistent spacing under every h2 across pages */
+h2.fw-bold {
+  letter-spacing: -0.01em;
+}
+h2.fw-bold + p.text-muted {
+  margin-bottom: 1.75rem;
+}
