@@ -27,7 +27,10 @@ function Modify() {
 
   return (
     <div className="d-flex justify-content-center py-5 px-3">
-      <div className="card border-0 shadow-sm p-4" style={{ maxWidth: "500px", width: "100%" }}>
+      <div
+        className="card border-0 shadow-sm p-4"
+        style={{ maxWidth: "500px", width: "100%" }}
+      >
         <h3 className="fw-bold mb-4">Modify Department</h3>
 
         <div className="mb-3">
@@ -63,7 +66,15 @@ function Modify() {
             </div>
             <div className="mb-3">
               <label className="form-label">Category</label>
-              <input className="form-control" {...register("category")} />
+              <select className="form-select" {...register("category")}>
+                <option value="">-- Select Category --</option>
+                <option value="Water">Water</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Gas">Gas</option>
+                <option value="Sanitation">Sanitation</option>
+                <option value="Roads">Roads</option>
+                <option value="Education">Education</option>
+              </select>
             </div>
             <div className="mb-3">
               <label className="form-label">Head Name</label>

@@ -1,12 +1,5 @@
 import { useState, useEffect } from "react";
-import { viewIssues } from "../../../serviceApi";
-
-function statusBadgeClass(status) {
-  if (status === "Resolved") return "bg-success";
-  if (status === "In Progress") return "bg-primary";
-  if (status === "Pending") return "bg-warning text-dark";
-  return "bg-secondary";
-}
+import { viewIssues, viewDepartments } from "../../../serviceApi";
 
 function priorityBadgeClass(priority) {
   if (priority === "High") return "bg-danger";
@@ -22,17 +15,61 @@ function categoryIcon(category) {
   if (c.includes("electric")) return "bi-lightning-charge-fill";
   if (c.includes("road")) return "bi-cone-striped";
   if (c.includes("gas")) return "bi-fire";
-  if (c.includes("school") || c.includes("education")) return "bi-mortarboard-fill";
+  if (c.includes("school") || c.includes("education"))
+    return "bi-mortarboard-fill";
   if (c.includes("sewer")) return "bi-water";
   return "bi-exclamation-circle-fill";
 }
 
+const STEPS = ["Pending", "In Progress", "Resolved"];
+
+function ProgressTracker({ status }) {
+  const currentIndex = STEPS.indexOf(status);
+
+  return (
+    <div className="progress-tracker">
+      {STEPS.map((step, index) => (
+        <div className="progress-step" key={step}>
+          <div
+            className={`progress-dot ${
+              index <= currentIndex ? "progress-dot-active" : ""
+            } ${index === currentIndex ? "progress-dot-current" : ""}`}
+          ></div>
+          <span
+            className={`progress-label ${
+              index <= currentIndex ? "progress-label-active" : ""
+            }`}
+          >
+            {step}
+          </span>
+          {index < STEPS.length - 1 && (
+            <div
+              className={`progress-line ${
+                index < currentIndex ? "progress-line-active" : ""
+              }`}
+            ></div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ViewIssues() {
   const [issues, setIssues] = useState([]);
+  const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
     viewIssues().then(setIssues);
+    viewDepartments().then(setDepartments);
   }, []);
+
+  function assignedDepartment(issue) {
+    const match = departments.find(
+      (dept) => dept.category?.toLowerCase() === issue.category?.toLowerCase(),
+    );
+    return match ? match.departmentName : "Unassigned";
+  }
 
   const grouped = issues.reduce((acc, issue) => {
     const cat = issue.category || "Uncategorized";
@@ -46,7 +83,9 @@ function ViewIssues() {
   return (
     <div className="container py-5">
       <h2 className="fw-bold mb-1">All Issues</h2>
-      <p className="text-muted mb-4">Civic issues grouped by category.</p>
+      <p className="text-muted mb-4">
+        Monitor how each department is progressing on reported issues.
+      </p>
 
       {categories.length === 0 && (
         <p className="text-muted">No issues found.</p>
@@ -74,31 +113,36 @@ function ViewIssues() {
                   <div>
                     <h6 className="fw-bold mb-1">{issue.title}</h6>
                     <p className="text-muted small mb-1">
-                      <i className="bi bi-geo-alt me-1"></i>{issue.location}
+                      <i className="bi bi-geo-alt me-1"></i>
+                      {issue.location}
                     </p>
                     <p className="text-muted small mb-1">{issue.description}</p>
                     <p className="text-muted small mb-0">
-                      <i className="bi bi-person me-1"></i>{issue.residentEmail}
+                      <i className="bi bi-person me-1"></i>
+                      {issue.residentEmail}
                       {issue.phone && (
-                        <> &nbsp;|&nbsp; <i className="bi bi-telephone me-1"></i>{issue.phone}</>
+                        <>
+                          {" "}
+                          &nbsp;|&nbsp; <i className="bi bi-telephone me-1"></i>
+                          {issue.phone}
+                        </>
                       )}
                     </p>
                   </div>
-                  <div className="text-end">
-                    <div className="mb-2">
-                      <span className={`badge rounded-pill ${statusBadgeClass(issue.status)} me-1`}>
-                        {issue.status}
-                      </span>
-                      <span className={`badge rounded-pill ${priorityBadgeClass(issue.priority)}`}>
-                        {issue.priority}
-                      </span>
-                    </div>
+                  <div className="text-end" style={{ minWidth: "240px" }}>
+                    <span
+                      className={`badge rounded-pill ${priorityBadgeClass(issue.priority)} mb-2`}
+                    >
+                      {issue.priority} Priority
+                    </span>
                     <p className="text-muted small mb-1">
-                      <i className="bi bi-calendar3 me-1"></i>{issue.issueDate}
+                      <i className="bi bi-calendar3 me-1"></i>
+                      {issue.issueDate}
                     </p>
-                    <p className="text-muted small mb-0">
-                      Dept: {issue.departmentId ?? "Unassigned"}
+                    <p className="text-muted small mb-2">
+                      Responsible: <strong>{assignedDepartment(issue)}</strong>
                     </p>
+                    <ProgressTracker status={issue.status} />
                   </div>
                 </div>
               </div>

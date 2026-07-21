@@ -20,6 +20,7 @@ import DeleteForm from "./Components/Admin Side/DeleteForm";
 import Modify from "./Components/Admin Side/Modify";
 import ViewIssues from "./Components/Admin Side/View/ViewIssues";
 import ViewDepartments from "./Components/Admin Side/View/ViewDepartments";
+import DepartmentDetail from "./Components/Admin Side/View/DepartmentDetail";
 import ViewResidents from "./Components/Admin Side/View/ViewResidents";
 import AdminNavbar from "./Components/Admin Side/AdminNavbar";
 import AdminFooter from "./Components/Admin Side/AdminFooter";
@@ -30,11 +31,11 @@ import RegistrationPart3 from "./Components/UserRegistration/RegistrationPart3";
 
 // User Imports
 import UserLayout from "./Components/User Side/UserLayout";
-import UserDashboard  from "./Components/User Side/UserDashboard";
-import ReportIssue   from "./Components/User Side/ReportIssue";
-import MyComplaints  from "./Components/User Side/MyComplaints";
-import TrackIssue    from "./Components/User Side/TrackIssue";
-import MyProfile     from "./Components/User Side/MyProfile";
+import UserDashboard from "./Components/User Side/UserDashboard";
+import ReportIssue from "./Components/User Side/ReportIssue";
+import MyComplaints from "./Components/User Side/MyComplaints";
+import TrackIssue from "./Components/User Side/TrackIssue";
+import MyProfile from "./Components/User Side/MyProfile";
 
 import EditIssue from "./Components/User Side/EditIssue";
 
@@ -48,49 +49,259 @@ import DepartmentProfile from "./Components/Department Side/DepartmentProfile";
 const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
 
-  { path: "/features", element: <div className="page-flex"><Navigation /><div className="page-content"><Feature /></div><Footer /></div> },
-  { path: "/statistics", element: <div className="page-flex"><Navigation /><div className="page-content"><Statistic /></div><Footer /></div> },
-  { path: "/howitworks", element: <div className="page-flex"><Navigation /><div className="page-content"><HowItWorks /></div><Footer /></div> },
-  { path: "/departments", element: <div className="page-flex"><Navigation /><div className="page-content"><DepartmentsSection /></div><Footer /></div> },
-  { path: "/newssection", element: <div className="page-flex"><Navigation /><div className="page-content"><NewsSection /></div><Footer /></div> },
+  {
+    path: "/features",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <Feature />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/statistics",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <Statistic />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/howitworks",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <HowItWorks />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/departments",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <DepartmentsSection />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/newssection",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <NewsSection />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
 
-  { path: "/login", element: <div className="page-flex"><Navigation /><div className="page-content"><LoginCards /></div><Footer /></div> },
-  { path: "/userlogin", element: <div className="page-flex"><Navigation /><div className="page-content"><UserLogin /></div><Footer /></div> },
-  { path: "/adminlogin", element: <div className="page-flex"><Navigation /><div className="page-content"><AdminLogin /></div><Footer /></div> },
-  { path: "/departmentlogin", element: <div className="page-flex"><Navigation /><div className="page-content"><DepartmentLogin /></div><Footer /></div> },
+  {
+    path: "/login",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <LoginCards />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/userlogin",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <UserLogin />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/adminlogin",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <AdminLogin />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/departmentlogin",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <DepartmentLogin />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
 
-  { path: "/register", element: <div className="page-flex"><Navigation /><div className="page-content"><RegistrationPart1 /></div><Footer /></div> },
-  { path: "/register/step2", element: <div className="page-flex"><Navigation /><div className="page-content"><RegistrationPart2 /></div><Footer /></div> },
-  { path: "/register/step3", element: <div className="page-flex"><Navigation /><div className="page-content"><RegistrationPart3 /></div><Footer /></div> },
+  {
+    path: "/register",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <RegistrationPart1 />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/register/step2",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <RegistrationPart2 />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/register/step3",
+    element: (
+      <div className="page-flex">
+        <Navigation />
+        <div className="page-content">
+          <RegistrationPart3 />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
 
   { path: "/admindashboard", element: <AdminDashboard /> },
-  { path: "/viewissues", element: <div className="page-flex"><AdminNavbar /><div className="page-content"><ViewIssues /></div><AdminFooter /></div> },
-  { path: "/viewdepartments", element: <div className="page-flex"><AdminNavbar /><div className="page-content"><ViewDepartments /></div><AdminFooter /></div> },
-  { path: "/adddepartment", element: <div className="page-flex"><AdminNavbar /><div className="page-content"><AddDepartment /></div><AdminFooter /></div> },
-  { path: "/modifydepartment", element: <div className="page-flex"><AdminNavbar /><div className="page-content"><Modify /></div><AdminFooter /></div> },
-  { path: "/deletedepartment", element: <div className="page-flex"><AdminNavbar /><div className="page-content"><DeleteForm /></div><AdminFooter /></div> },
-  { path: "/viewresidents", element: <div className="page-flex"><AdminNavbar /><div className="page-content"><ViewResidents /></div><AdminFooter /></div> },
+  {
+    path: "/viewissues",
+    element: (
+      <div className="page-flex">
+        <AdminNavbar />
+        <div className="page-content">
+          <ViewIssues />
+        </div>
+        <AdminFooter />
+      </div>
+    ),
+  },
+  {
+    path: "/viewdepartments",
+    element: (
+      <div className="page-flex">
+        <AdminNavbar />
+        <div className="page-content">
+          <ViewDepartments />
+        </div>
+        <AdminFooter />
+      </div>
+    ),
+  },
+  {
+    path: "/departmentdetail/:id",
+    element: (
+      <div className="page-flex">
+        <AdminNavbar />
+        <div className="page-content">
+          <DepartmentDetail />
+        </div>
+        <AdminFooter />
+      </div>
+    ),
+  },
 
-  // { path: "/editissue/:id", element: <EditIssue /> },
+  {
+    path: "/adddepartment",
+    element: (
+      <div className="page-flex">
+        <AdminNavbar />
+        <div className="page-content">
+          <AddDepartment />
+        </div>
+        <AdminFooter />
+      </div>
+    ),
+  },
+  {
+    path: "/modifydepartment",
+    element: (
+      <div className="page-flex">
+        <AdminNavbar />
+        <div className="page-content">
+          <Modify />
+        </div>
+        <AdminFooter />
+      </div>
+    ),
+  },
+  {
+    path: "/deletedepartment",
+    element: (
+      <div className="page-flex">
+        <AdminNavbar />
+        <div className="page-content">
+          <DeleteForm />
+        </div>
+        <AdminFooter />
+      </div>
+    ),
+  },
+  {
+    path: "/viewresidents",
+    element: (
+      <div className="page-flex">
+        <AdminNavbar />
+        <div className="page-content">
+          <ViewResidents />
+        </div>
+        <AdminFooter />
+      </div>
+    ),
+  },
 
-{
-  element: <UserLayout />,
-  children: [
-    { path: "/userdashboard", element: <UserDashboard /> },
-    { path: "/reportissue",   element: <ReportIssue /> },
-    { path: "/mycomplaints",  element: <MyComplaints /> },
-    { path: "/trackissue",    element: <TrackIssue /> },
-    { path: "/myprofile",     element: <MyProfile /> },
-    { path: "/editissue/:id", element: <EditIssue /> },
-  ],
-},
+  {
+    element: <UserLayout />,
+    children: [
+      { path: "/userdashboard", element: <UserDashboard /> },
+      { path: "/reportissue", element: <ReportIssue /> },
+      { path: "/mycomplaints", element: <MyComplaints /> },
+      { path: "/trackissue", element: <TrackIssue /> },
+      { path: "/myprofile", element: <MyProfile /> },
+      { path: "/editissue/:id", element: <EditIssue /> },
+    ],
+  },
+
   {
     element: <DepartmentLayout />,
     children: [
       { path: "/departmentdashboard", element: <DepartmentDashboard /> },
-      { path: "/viewassignedissues",  element: <ViewAssignedIssues /> },
-      { path: "/updateissuestatus",   element: <UpdateIssueStatus /> },
-      { path: "/departmentprofile",   element: <DepartmentProfile /> },
+      { path: "/viewassignedissues", element: <ViewAssignedIssues /> },
+      { path: "/updateissuestatus", element: <UpdateIssueStatus /> },
+      { path: "/departmentprofile", element: <DepartmentProfile /> },
     ],
   },
 ]);

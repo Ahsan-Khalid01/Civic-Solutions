@@ -413,3 +413,277 @@ h2.fw-bold {
 h2.fw-bold + p.text-muted {
   margin-bottom: 1.75rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   DEPARTMENT REGISTRY — a distinct, document-like directory
+   view, not another card grid. Each entry reads like an
+   official record: index, seal, name, meta, contact.
+   ========================================================= */
+
+.registry-header {
+  border-bottom: 2px solid #1a1a1a;
+  padding-bottom: 1.25rem;
+}
+.registry-eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a7b1f;
+  margin-bottom: 0.4rem;
+}
+.registry-title {
+  font-family: "Lora", Georgia, serif;
+  font-weight: 700;
+  font-size: 2.1rem;
+}
+
+.registry-list {
+  border-top: 1px solid #e9e5da;
+}
+
+.registry-entry {
+  display: grid;
+  grid-template-columns: 44px 52px 1fr auto;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.15rem 0.5rem;
+  border-bottom: 1px solid #e9e5da;
+  border-left: 3px solid transparent;
+  transition: border-left-color 0.2s ease, background-color 0.2s ease;
+}
+.registry-entry:hover {
+  border-left-color: var(--entry-hue);
+  background-color: color-mix(in srgb, var(--entry-hue) 5%, transparent);
+}
+
+.registry-index {
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  color: #9a9186;
+  text-align: right;
+}
+
+.registry-seal {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lora", Georgia, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--entry-hue);
+  background-color: color-mix(in srgb, var(--entry-hue) 12%, white);
+  border: 1px solid color-mix(in srgb, var(--entry-hue) 35%, white);
+}
+
+.registry-name {
+  font-family: "Lora", Georgia, serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #1a1a1a;
+}
+
+.registry-category {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--entry-hue);
+  background-color: color-mix(in srgb, var(--entry-hue) 10%, white);
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+}
+
+.registry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.25rem;
+  font-size: 0.83rem;
+  color: #6b6459;
+  margin-top: 0.3rem;
+}
+.registry-meta i {
+  margin-right: 0.3rem;
+  color: #9a9186;
+}
+
+.registry-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  font-size: 0.83rem;
+  color: #4a4438;
+  white-space: nowrap;
+}
+.registry-contact i {
+  margin-right: 0.3rem;
+}
+
+@media (max-width: 640px) {
+  .registry-entry {
+    grid-template-columns: 36px 44px 1fr;
+  }
+  .registry-contact {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding-left: 80px;
+  }
+}
+
+
+
+
+
+
+.registry-entry {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: grid;
+}
+
+.detail-banner {
+  background-size: cover;
+  background-position: center;
+  min-height: 280px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.detail-banner-overlay {
+  width: 100%;
+  padding: 2.5rem 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 21, 26, 0.15) 0%,
+    rgba(20, 21, 26, 0.85) 100%
+  );
+}
+
+.detail-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  transition: color 0.15s ease;
+}
+.detail-back-link:hover {
+  color: #ffc107;
+}
+
+.detail-title {
+  font-family: "Lora", Georgia, serif;
+  font-weight: 700;
+  color: #fff;
+  font-size: 2.4rem;
+  margin-bottom: 0.4rem;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+.detail-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0;
+}
+
+
+
+
+
+
+
+/* PROGRESS TRACKER — read-only, for Admin to monitor status.
+   Admin never edits this directly; only Department can. */
+
+.progress-tracker {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.progress-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64px;
+}
+
+.progress-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #dee2e6;
+  border: 2px solid #dee2e6;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.progress-dot-active {
+  background: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.progress-dot-current {
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.18);
+}
+
+.progress-label {
+  font-size: 0.65rem;
+  color: #adb5bd;
+  margin-top: 5px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.progress-label-active {
+  color: #212529;
+  font-weight: 600;
+}
+
+.progress-line {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #dee2e6;
+  z-index: 1;
+}
+
+.progress-line-active {
+  background: #0d6efd;
+}
+
+.progress-step:last-child .progress-dot-current {
+  background: #198754;
+  border-color: #198754;
+  box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.18);
+}
+.progress-step:last-child .progress-label-active {
+  color: #198754;
+}

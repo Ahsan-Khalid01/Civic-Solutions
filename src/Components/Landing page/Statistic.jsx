@@ -1,25 +1,62 @@
-﻿function StatsSection() {
+﻿import { useState, useEffect } from "react";
+import { viewResidents, viewDepartments, viewIssues } from "../../serviceApi";
+
+function StatsSection() {
+  const [counts, setCounts] = useState({
+    issuesReported: 0,
+    issuesResolved: 0,
+    departments: 0,
+    residents: 0,
+  });
+
+  useEffect(() => {
+    async function loadStats() {
+      try {
+        const [residents, departments, issues] = await Promise.all([
+          viewResidents(),
+          viewDepartments(),
+          viewIssues(),
+        ]);
+
+        const resolvedCount = issues.filter(
+          (issue) => issue.status === "Resolved",
+        ).length;
+
+        setCounts({
+          issuesReported: issues.length,
+          issuesResolved: resolvedCount,
+          departments: departments.length,
+          residents: residents.length,
+        });
+      } catch (error) {
+        console.error("Failed to load stats:", error);
+      }
+    }
+
+    loadStats();
+  }, []);
+
   const stats = [
     {
-      value: "5000+",
+      value: counts.issuesReported,
       label: "Issues Reported",
       borderClass: "border-primary",
       textClass: "text-primary",
     },
     {
-      value: "4200+",
+      value: counts.issuesResolved,
       label: "Issues Resolved",
       borderClass: "border-success",
       textClass: "text-success",
     },
     {
-      value: "50+",
+      value: counts.departments,
       label: "Departments",
       borderClass: "border-warning",
       textClass: "text-warning",
     },
     {
-      value: "10K+",
+      value: counts.residents,
       label: "Registered Users",
       borderClass: "border-danger",
       textClass: "text-danger",
